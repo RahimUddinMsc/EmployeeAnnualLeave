@@ -11,7 +11,7 @@ namespace AnnualLeave.Controllers
         // GET: Booking
         public ActionResult Index()
         {
-            return Content("hi sddsd");
+            return View();
         }
 
         public ActionResult Edit(int id)
