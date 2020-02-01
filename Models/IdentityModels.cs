@@ -20,6 +20,15 @@ namespace AnnualLeave.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Calendar> Calendars { get; set; }
+        public DbSet<Approval> Approvals { get; set; }
+        public DbSet<Pending> Pendings { get; set; }
+        public DbSet<Role> RolesCustom { get; set; }
+
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

@@ -188,10 +188,80 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001270809372_InitialModel.cs" />
+    <Compile Include="Migrations\202001270809372_InitialModel.Designer.cs">
+      <DependentUpon>202001270809372_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001280801155_AddBookType.cs" />
+    <Compile Include="Migrations\202001280801155_AddBookType.Designer.cs">
+      <DependentUpon>202001280801155_AddBookType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001280805426_RemoveEmployeeIdFromBook.cs" />
+    <Compile Include="Migrations\202001280805426_RemoveEmployeeIdFromBook.Designer.cs">
+      <DependentUpon>202001280805426_RemoveEmployeeIdFromBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001290805051_ApprovalModel.cs" />
+    <Compile Include="Migrations\202001290805051_ApprovalModel.Designer.cs">
+      <DependentUpon>202001290805051_ApprovalModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001290809241_ForeignKeyAddition.cs" />
+    <Compile Include="Migrations\202001290809241_ForeignKeyAddition.Designer.cs">
+      <DependentUpon>202001290809241_ForeignKeyAddition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001290811409_RemoveDuplicateKey.cs" />
+    <Compile Include="Migrations\202001290811409_RemoveDuplicateKey.Designer.cs">
+      <DependentUpon>202001290811409_RemoveDuplicateKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001290812314_AddApprovalTypes.cs" />
+    <Compile Include="Migrations\202001290812314_AddApprovalTypes.Designer.cs">
+      <DependentUpon>202001290812314_AddApprovalTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002010805247_AddConstraintsToDb.cs" />
+    <Compile Include="Migrations\202002010805247_AddConstraintsToDb.Designer.cs">
+      <DependentUpon>202002010805247_AddConstraintsToDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002011207221_AddCalendarModel.cs" />
+    <Compile Include="Migrations\202002011207221_AddCalendarModel.Designer.cs">
+      <DependentUpon>202002011207221_AddCalendarModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002011237398_UpdateForiegnKeysForBookAndEmployee.cs" />
+    <Compile Include="Migrations\202002011237398_UpdateForiegnKeysForBookAndEmployee.Designer.cs">
+      <DependentUpon>202002011237398_UpdateForiegnKeysForBookAndEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002011244335_AddPendingModel.cs" />
+    <Compile Include="Migrations\202002011244335_AddPendingModel.Designer.cs">
+      <DependentUpon>202002011244335_AddPendingModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002011247420_AddRoleModel.cs" />
+    <Compile Include="Migrations\202002011247420_AddRoleModel.Designer.cs">
+      <DependentUpon>202002011247420_AddRoleModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002011249180_AddRoleForiegnKeyToEmployee.cs" />
+    <Compile Include="Migrations\202002011249180_AddRoleForiegnKeyToEmployee.Designer.cs">
+      <DependentUpon>202002011249180_AddRoleForiegnKeyToEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002011253335_AddRoleNamesToTable.cs" />
+    <Compile Include="Migrations\202002011253335_AddRoleNamesToTable.Designer.cs">
+      <DependentUpon>202002011253335_AddRoleNamesToTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002011257271_ResetRoleTable.cs" />
+    <Compile Include="Migrations\202002011257271_ResetRoleTable.Designer.cs">
+      <DependentUpon>202002011257271_ResetRoleTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002011304356_RoundTwoRolesTableReset.cs" />
+    <Compile Include="Migrations\202002011304356_RoundTwoRolesTableReset.Designer.cs">
+      <DependentUpon>202002011304356_RoundTwoRolesTableReset.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Approval.cs" />
+    <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\Calendar.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Pending.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -271,6 +341,56 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202001270809372_InitialModel.resx">
+      <DependentUpon>202001270809372_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001280801155_AddBookType.resx">
+      <DependentUpon>202001280801155_AddBookType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001280805426_RemoveEmployeeIdFromBook.resx">
+      <DependentUpon>202001280805426_RemoveEmployeeIdFromBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001290805051_ApprovalModel.resx">
+      <DependentUpon>202001290805051_ApprovalModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001290809241_ForeignKeyAddition.resx">
+      <DependentUpon>202001290809241_ForeignKeyAddition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001290811409_RemoveDuplicateKey.resx">
+      <DependentUpon>202001290811409_RemoveDuplicateKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001290812314_AddApprovalTypes.resx">
+      <DependentUpon>202001290812314_AddApprovalTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002010805247_AddConstraintsToDb.resx">
+      <DependentUpon>202002010805247_AddConstraintsToDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002011207221_AddCalendarModel.resx">
+      <DependentUpon>202002011207221_AddCalendarModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002011237398_UpdateForiegnKeysForBookAndEmployee.resx">
+      <DependentUpon>202002011237398_UpdateForiegnKeysForBookAndEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002011244335_AddPendingModel.resx">
+      <DependentUpon>202002011244335_AddPendingModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002011247420_AddRoleModel.resx">
+      <DependentUpon>202002011247420_AddRoleModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002011249180_AddRoleForiegnKeyToEmployee.resx">
+      <DependentUpon>202002011249180_AddRoleForiegnKeyToEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002011253335_AddRoleNamesToTable.resx">
+      <DependentUpon>202002011253335_AddRoleNamesToTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002011257271_ResetRoleTable.resx">
+      <DependentUpon>202002011257271_ResetRoleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002011304356_RoundTwoRolesTableReset.resx">
+      <DependentUpon>202002011304356_RoundTwoRolesTableReset.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

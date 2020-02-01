@@ -17,6 +17,7 @@
             <tr>
                 <th>First</th>
                 <th>Last</th>
+                <th>Role</th>
             </tr>
         </thead>
         <tbody>
@@ -24,8 +25,9 @@
             @foreach (var employee in Model)
             {
             <tr>
-                <td>@Html.ActionLink(employee.FirstName,"Details","Home",new { id = employee.EmployeeId },null)</td>
+                <td>@Html.ActionLink(employee.FirstName, "Details", "Home", new { id = employee.EmployeeId }, null)</td>
                 <td>@employee.LastName</td>
+                <td>@employee.Role.RoleName</td>
             </tr>
             }
 
@@ -36,4 +38,5 @@
 
 
 }
+
 

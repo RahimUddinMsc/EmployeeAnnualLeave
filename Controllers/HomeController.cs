@@ -1,18 +1,29 @@
 ﻿using AnnualLeave.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace AnnualLeave.Controllers
 {
     public class HomeController : Controller
     {
+
+        private ApplicationDbContext _context;
+
+        public HomeController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
         public ActionResult Index()
         {
 
-            var test = GetEmployeeData();
+            var test = _context.Employees.Include(e => e.Role).ToList();
             return View(test);
         }
 
@@ -32,22 +43,11 @@ namespace AnnualLeave.Controllers
 
         public ActionResult Details(int id)
         {
-            var test = GetEmployeeData().SingleOrDefault(c => c.EmployeeId == id);
+            var test = _context.Employees.SingleOrDefault(c => c.EmployeeId == id);
             return Content("Name: " + test.FirstName  +" Minutes available:" + test.MinutesUsed);
         }
 
 
-        private IEnumerable<Employee> GetEmployeeData()
-        {
-            return new List<Employee>
-            {
-                new Employee {EmployeeId = 1, RoleID = 1, FirstName = "mark", LastName = "tame", MinutesAvailable = 23.3, MinutesUsed = 10},
-                new Employee {EmployeeId = 2, RoleID = 2, FirstName = "sally", LastName = "jenkins", MinutesAvailable = 13.3, MinutesUsed = 5}
-            };
-            
-            
-           
-        }
-
+   
     }
 }
