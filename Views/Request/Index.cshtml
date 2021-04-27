@@ -1,7 +1,111 @@
-﻿
+﻿@model AnnualLeave.ViewModel.UserRequests
+
+
 @{
-    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+    var dte = DateTime.Now;
+    var yr = dte.Year;
+    var month = dte.ToString("MMMM");
+    var dayName = dte.DayOfWeek;
+    var day = dte.Day;
+    var suffix = "";
+
+    if (day == 1 || day == 21 || day == 31)
+    {
+        suffix = "st";
+    }
+    else if (day == 2 || day == 22)
+    {
+        suffix = "nd";
+    }
+    else if (day == 3 || day == 23)
+    {
+        suffix = "rd";
+    }
+    else
+    {
+        suffix = "th";
+    }
+
+    var dayAppend = day + suffix;
 }
 
-<h2>Request - Index</h2>
+@section CSSAdditions{
+
+    <link rel="stylesheet" href="~/Content/request.css">
+}
+
+<div class="body-panel-left content-panel-bg">
+
+    <div class="panel-left-container">
+
+        <div class="title-left-container">
+            <h2>My Requests</h2>
+            <h3>@dayName @dayAppend</h3>
+        </div>
+
+
+        <hr />
+
+        <div class="request-stats-block">
+
+            <div class="request-stat-info">
+                <span class="request-stat-title">Approved</span>
+                <span>@Model.Approved</span>
+            </div>
+
+            <div class="request-stat-info">
+                <span class="request-stat-title">Declined</span>
+                <span>@Model.Declined</span>
+            </div>
+
+            <div class="request-stat-info">
+                <span class="request-stat-title">Pending</span>
+                <span>@Model.Pending</span>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="body-panel-right ">
+
+    @if (!Model.RequestList.Any())
+    {
+        <div class="no-request-panel content-panel-bg">
+            <i class="fa fa-archive" aria-hidden="true"></i>
+            <h2>No Requests</h2>
+        </div>
+    }
+    else
+    {
+        <div class="request-panel-right content-panel-bg user-right-panel-adjust">
+            @foreach (var req in Model.RequestList)
+            {
+                Html.RenderPartial("_RequestItemUser", req);
+            }
+        </div>
+    }
+
+
+
+
+</div>
+
+
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/ajaxModule.js"></script>
+    <script src="~/Scripts/popupModule.js"></script>
+    <script src="~/Scripts/Requests.js"></script>
+
+}
+
+
+
+
 

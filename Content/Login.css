@@ -1,0 +1,144 @@
+﻿body {
+    background: #0D202A;
+}
+
+
+.login-ct {
+    display: flex;
+    position: fixed;
+    bottom: 0%;
+    opacity:0;
+    left: 49%;
+    transform: translate(-50%,-50%);
+    height: 40vh;
+    width: 42vw;
+    justify-content: center;
+    animation: login-fade 0.8s ease-in forwards 1s;
+}
+
+@keyframes login-fade{
+    0% {
+        bottom: 0%;
+        opacity:0;
+    }
+    100% {
+        bottom: 15%;
+        opacity: 1;
+    }
+}
+
+.login-header-block {
+    display:flex;
+    flex-direction:column;   
+    width: 30%;
+    height: 100%;
+    background: #207B98;
+}
+
+.login-header-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 35%;
+    width: 100%;
+    color: white;
+    font-size: 3rem;
+    padding-left: 25%;
+    color: #EEE8A9
+}
+
+.login-header-underline {
+    justify-self: flex-end;
+    width: 55%;
+    margin: 15px 0px;
+}
+
+.login-entry-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70%;
+    height: 100%;
+}
+
+.login-form {
+    height:100%;
+}
+
+.login-entry-ct {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #EEE8A9;
+    width: 100%;
+    height: 80%;
+    padding: 0% 12%;
+}
+
+.login-field-ct {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-size: 1.8rem;
+    width: 100%;
+    height:33%
+}
+
+.login-field-ct h4{
+    align-self:flex-start;
+    font-size:2rem;
+}
+
+.text-entry-field {
+    color: white;
+    width: 100%;
+    background: #207B98;
+    outline: none;
+    border: none;
+    padding: 5px;
+}
+
+.login-btn-ct {
+    width: 100%;
+    height: 0%;
+}
+
+.login-btn {
+    background: #1b4e5dcf;
+    font-size: 2rem;
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 5px;
+    color: #eee8a9;
+    transition: 0.5s ease-in;
+}
+
+.login-btn:hover {
+    color: black;
+    background: #eee8a9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

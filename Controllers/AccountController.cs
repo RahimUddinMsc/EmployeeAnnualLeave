@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AnnualLeave.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace AnnualLeave.Controllers
 {
@@ -17,9 +18,11 @@ namespace AnnualLeave.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _context;
 
         public AccountController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -57,8 +60,11 @@ namespace AnnualLeave.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            //var userSelected = _context.Users.SingleOrDefault(e => e.Id == "931ad8ea-1ce8-437a-b7c3-22d8b6fd859e");
+            //var token = UserManager.GeneratePasswordResetToken(userSelected.Id);
+            //UserManager.ResetPassword(userSelected.Id, token, "");
+            ViewBag.ReturnUrl = returnUrl;                        
+            return View("AnnualLogin");
         }
 
         //
@@ -138,8 +144,11 @@ namespace AnnualLeave.Controllers
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
-        {
-            return View();
+        {            
+            var regModel = new RegisterViewModel();
+            regModel.Users = _context.Users;
+
+            return View(regModel);
         }
 
         //
@@ -151,10 +160,25 @@ namespace AnnualLeave.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {                     
+                    UserName = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,   
+                    MinutesAvailable = model.MinutesAvailable,
+                    MinutesUsed = 0,
+                    ProfileImage = model.ProfileImage
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    //Temp code to add a role
+                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    //await roleManager.CreateAsync(new IdentityRole("CanManageStaff"));
+                    //await UserManager.AddToRoleAsync(user.Id, "CanManageStaff");
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

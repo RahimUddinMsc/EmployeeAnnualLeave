@@ -1,0 +1,62 @@
+﻿@model AnnualLeave.Dtos.StaffRequestDto
+
+
+<div class="request-item-parent" data-book-id="@Model.BookID">
+
+
+    <div class="req-cal-block">
+        <div class="req-cal-date">
+            <span>@Model.Date</span>
+        </div>
+
+        <div class="req-cal-time">
+            <span>
+                @if (Model.CustomTime == true)
+                {
+                    @(Model.StartTime + " - " + Model.EndTime)
+                }
+                else
+                {
+                    @("Full Day")
+                }
+            </span>
+        </div>      
+
+        <div class="req-options" >
+
+            <div class="req-action-approve rec-action-btn">
+                <span>Approve</span>
+            </div>
+
+
+            <div class="req-action-decline rec-action-btn">
+                <span>Decline</span>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div class="req-content">
+
+        <div class="req-content-reason">
+            @Model.Reason
+
+        </div>
+
+        <div class="req-content-response">
+            <textarea>
+
+
+            </textarea>
+
+        </div>
+
+
+    </div>
+
+
+
+
+</div>

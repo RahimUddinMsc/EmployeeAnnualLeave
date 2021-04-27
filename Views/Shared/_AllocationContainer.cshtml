@@ -1,0 +1,18 @@
+﻿@model AnnualLeave.ViewModel.CalendarAllocation
+
+<div class="cal-container-headings">
+    <div class="cal-header content-panel-bg">Mon</div>
+    <div class="cal-header content-panel-bg">Tue</div>
+    <div class="cal-header content-panel-bg">Wed</div>
+    <div class="cal-header content-panel-bg">Thur</div>
+    <div class="cal-header content-panel-bg">Fri</div>
+    <div class="cal-header content-panel-bg">Sat</div>
+    <div class="cal-header content-panel-bg">Sun</div>
+</div>
+
+<div class="calendar-container">    
+    @foreach (var item in Model.CalendarDays)
+    {
+        Html.RenderPartial("_CalenderAllocationDay", item);
+    }
+</div>

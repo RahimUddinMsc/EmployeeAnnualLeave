@@ -45,10 +45,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>packages\AutoMapper.4.1.0\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="de.lkraemer.tagbuilder, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\de.lkraemer.tagbuilder.1.0.2\lib\netstandard2.0\de.lkraemer.tagbuilder.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -110,9 +116,6 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -177,14 +180,32 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MappingProfile.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AllocationController.cs" />
+    <Compile Include="Controllers\Api\CalendarApiController.cs" />
+    <Compile Include="Controllers\Api\EmployeeController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\TeamRequestController.cs" />
+    <Compile Include="Dtos\CalendarDto.cs" />
+    <Compile Include="Dtos\AllocationRequest.cs" />
+    <Compile Include="Dtos\EmployeeDto.cs" />
+    <Compile Include="Dtos\HolidayAllocationDto.cs" />
+    <Compile Include="Dtos\HolidayRequestDto.cs" />
+    <Compile Include="Dtos\HolidayRequestList.cs" />
+    <Compile Include="Dtos\RequestDto.cs" />
+    <Compile Include="Dtos\UserInfoDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -252,31 +273,201 @@
     <Compile Include="Migrations\202002011304356_RoundTwoRolesTableReset.Designer.cs">
       <DependentUpon>202002011304356_RoundTwoRolesTableReset.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002021200438_CustomTimeBookModelAddittion.cs" />
+    <Compile Include="Migrations\202002021200438_CustomTimeBookModelAddittion.Designer.cs">
+      <DependentUpon>202002021200438_CustomTimeBookModelAddittion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021203435_CalendarModelUpdateWithCustomTimeSet.cs" />
+    <Compile Include="Migrations\202002021203435_CalendarModelUpdateWithCustomTimeSet.Designer.cs">
+      <DependentUpon>202002021203435_CalendarModelUpdateWithCustomTimeSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021314212_CustomTimeForeignKeyRemovedFromCalendar.cs" />
+    <Compile Include="Migrations\202002021314212_CustomTimeForeignKeyRemovedFromCalendar.Designer.cs">
+      <DependentUpon>202002021314212_CustomTimeForeignKeyRemovedFromCalendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021325073_CustomTimeBookChangedToCustomTime.cs" />
+    <Compile Include="Migrations\202002021325073_CustomTimeBookChangedToCustomTime.Designer.cs">
+      <DependentUpon>202002021325073_CustomTimeBookChangedToCustomTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021327223_BookForeignKeyAddedToCustomTime.cs" />
+    <Compile Include="Migrations\202002021327223_BookForeignKeyAddedToCustomTime.Designer.cs">
+      <DependentUpon>202002021327223_BookForeignKeyAddedToCustomTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021608231_BookRelationshipAddedToEmployee.cs" />
+    <Compile Include="Migrations\202002021608231_BookRelationshipAddedToEmployee.Designer.cs">
+      <DependentUpon>202002021608231_BookRelationshipAddedToEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021648513_RemovedEmployeeKeyFromBook.cs" />
+    <Compile Include="Migrations\202002021648513_RemovedEmployeeKeyFromBook.Designer.cs">
+      <DependentUpon>202002021648513_RemovedEmployeeKeyFromBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021655410_EmployeeBookLinkIdModelCreated.cs" />
+    <Compile Include="Migrations\202002021655410_EmployeeBookLinkIdModelCreated.Designer.cs">
+      <DependentUpon>202002021655410_EmployeeBookLinkIdModelCreated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021657372_EmployeeBookLinkIdKeyAddedToEmployee.cs" />
+    <Compile Include="Migrations\202002021657372_EmployeeBookLinkIdKeyAddedToEmployee.Designer.cs">
+      <DependentUpon>202002021657372_EmployeeBookLinkIdKeyAddedToEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021714496_ResetAllRequestedLinkedTables.cs" />
+    <Compile Include="Migrations\202002021714496_ResetAllRequestedLinkedTables.Designer.cs">
+      <DependentUpon>202002021714496_ResetAllRequestedLinkedTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021725417_AddInitialDummyRecord.cs" />
+    <Compile Include="Migrations\202002021725417_AddInitialDummyRecord.Designer.cs">
+      <DependentUpon>202002021725417_AddInitialDummyRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021742272_AddInitialDummyRecord1.cs" />
+    <Compile Include="Migrations\202002021742272_AddInitialDummyRecord1.Designer.cs">
+      <DependentUpon>202002021742272_AddInitialDummyRecord1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021854383_RemovedDuplicateKeyFromEmployees.cs" />
+    <Compile Include="Migrations\202002021854383_RemovedDuplicateKeyFromEmployees.Designer.cs">
+      <DependentUpon>202002021854383_RemovedDuplicateKeyFromEmployees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021856189_UpdatedKeysInEmployeesBookLink.cs" />
+    <Compile Include="Migrations\202002021856189_UpdatedKeysInEmployeesBookLink.Designer.cs">
+      <DependentUpon>202002021856189_UpdatedKeysInEmployeesBookLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021934162_MinutesAllocatedAddedToBook.cs" />
+    <Compile Include="Migrations\202002021934162_MinutesAllocatedAddedToBook.Designer.cs">
+      <DependentUpon>202002021934162_MinutesAllocatedAddedToBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002231522056_SeedUsers.cs" />
+    <Compile Include="Migrations\202002231522056_SeedUsers.Designer.cs">
+      <DependentUpon>202002231522056_SeedUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003081252585_MinutesAddedToUserTable.cs" />
+    <Compile Include="Migrations\202003081252585_MinutesAddedToUserTable.Designer.cs">
+      <DependentUpon>202003081252585_MinutesAddedToUserTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003170755145_AddProfileImgToTable.cs" />
+    <Compile Include="Migrations\202003170755145_AddProfileImgToTable.Designer.cs">
+      <DependentUpon>202003170755145_AddProfileImgToTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007301406004_AddProfilePicToUsers.cs" />
+    <Compile Include="Migrations\202007301406004_AddProfilePicToUsers.Designer.cs">
+      <DependentUpon>202007301406004_AddProfilePicToUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007301446420_AddNameDateToAspRoles.cs" />
+    <Compile Include="Migrations\202007301446420_AddNameDateToAspRoles.Designer.cs">
+      <DependentUpon>202007301446420_AddNameDateToAspRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009121306404_QueueTableAdded.cs" />
+    <Compile Include="Migrations\202009121306404_QueueTableAdded.Designer.cs">
+      <DependentUpon>202009121306404_QueueTableAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009121309047_QueueTableAddedRD2.cs" />
+    <Compile Include="Migrations\202009121309047_QueueTableAddedRD2.Designer.cs">
+      <DependentUpon>202009121309047_QueueTableAddedRD2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009261315341_EmployeeLinkTableAdjustedToPointToUsers.cs" />
+    <Compile Include="Migrations\202009261315341_EmployeeLinkTableAdjustedToPointToUsers.Designer.cs">
+      <DependentUpon>202009261315341_EmployeeLinkTableAdjustedToPointToUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010171237270_ManagerIDAddedToAspUsers.cs" />
+    <Compile Include="Migrations\202010171237270_ManagerIDAddedToAspUsers.Designer.cs">
+      <DependentUpon>202010171237270_ManagerIDAddedToAspUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010171316433_addBookForeignKeyToQueueModel.cs" />
+    <Compile Include="Migrations\202010171316433_addBookForeignKeyToQueueModel.Designer.cs">
+      <DependentUpon>202010171316433_addBookForeignKeyToQueueModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010171318243_removeBookId.cs" />
+    <Compile Include="Migrations\202010171318243_removeBookId.Designer.cs">
+      <DependentUpon>202010171318243_removeBookId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010171332376_AddDateTimePropertyToBookRecord.cs" />
+    <Compile Include="Migrations\202010171332376_AddDateTimePropertyToBookRecord.Designer.cs">
+      <DependentUpon>202010171332376_AddDateTimePropertyToBookRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010181557068_AddBookIDToPendingObj.cs" />
+    <Compile Include="Migrations\202010181557068_AddBookIDToPendingObj.Designer.cs">
+      <DependentUpon>202010181557068_AddBookIDToPendingObj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010241415086_removeForeignKeyFromPendingObj.cs" />
+    <Compile Include="Migrations\202010241415086_removeForeignKeyFromPendingObj.Designer.cs">
+      <DependentUpon>202010241415086_removeForeignKeyFromPendingObj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010241419088_AddPendingForeignKeyTOBookObj.cs" />
+    <Compile Include="Migrations\202010241419088_AddPendingForeignKeyTOBookObj.Designer.cs">
+      <DependentUpon>202010241419088_AddPendingForeignKeyTOBookObj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010241435301_removePendingKeyFromBook.cs" />
+    <Compile Include="Migrations\202010241435301_removePendingKeyFromBook.Designer.cs">
+      <DependentUpon>202010241435301_removePendingKeyFromBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010241436544_removeBookKeyToPending.cs" />
+    <Compile Include="Migrations\202010241436544_removeBookKeyToPending.Designer.cs">
+      <DependentUpon>202010241436544_removeBookKeyToPending.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011071341194_holUserInfoAddded.cs" />
+    <Compile Include="Migrations\202011071341194_holUserInfoAddded.Designer.cs">
+      <DependentUpon>202011071341194_holUserInfoAddded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011071344086_holUserInfoAdddedMK2.cs" />
+    <Compile Include="Migrations\202011071344086_holUserInfoAdddedMK2.Designer.cs">
+      <DependentUpon>202011071344086_holUserInfoAdddedMK2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012281512507_customTimeSetChangedFromDateToString.cs" />
+    <Compile Include="Migrations\202012281512507_customTimeSetChangedFromDateToString.Designer.cs">
+      <DependentUpon>202012281512507_customTimeSetChangedFromDateToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101281439271_AddTeamsTable.cs" />
+    <Compile Include="Migrations\202101281439271_AddTeamsTable.Designer.cs">
+      <DependentUpon>202101281439271_AddTeamsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Approval.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Calendar.cs" />
+    <Compile Include="Models\CustomTime.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\EmployeeBookLink.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Pending.cs" />
+    <Compile Include="Models\Queue.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\RoleName.cs" />
+    <Compile Include="Models\Team.cs" />
+    <Compile Include="Models\UserHolidayInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\BookingProcess.cs" />
+    <Compile Include="ViewModel\CalendarAllocation.cs" />
+    <Compile Include="ViewModel\DashboardInfo.cs" />
+    <Compile Include="ViewModel\EmployeeCalendarData.cs" />
+    <Compile Include="ViewModel\TeamHandler.cs" />
+    <Compile Include="ViewModel\UserRequests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\allocation.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\calendar.css" />
+    <Content Include="Content\dashboard.css" />
+    <Content Include="Content\dashboardV2.css" />
+    <Content Include="Content\Login.css" />
+    <Content Include="Content\request.css" />
+    <Content Include="Content\SiteV2.css" />
+    <Content Include="Content\Team.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="pics\trop.PNG" />
+    <Content Include="Scripts\ajaxModule.js" />
+    <Content Include="Scripts\allocation.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\calendarScript.js" />
+    <Content Include="Scripts\dashboard.js" />
+    <Content Include="Scripts\helpers.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -287,6 +478,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\pageTransition.js" />
+    <Content Include="Scripts\popupModule.js" />
+    <Content Include="Scripts\RequestsManage.js" />
+    <Content Include="Scripts\Requests.js" />
+    <Content Include="Vids\blueSky.mp4" />
+    <Content Include="Vids\techBGSmall.mp4" />
+    <Content Include="Vids\whiteCircles.mp4" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -322,12 +520,29 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Nav.cshtml" />
-    <Content Include="Views\Request\Index.cshtml" />
+    <Content Include="Views\Request\IndexManage.cshtml" />
     <Content Include="Views\Booking\Index.cshtml" />
+    <Content Include="Views\Calendar\Index.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Employee\Display.cshtml" />
+    <Content Include="Views\Account\View.cshtml" />
+    <Content Include="Views\Account\AnnualLogin.cshtml" />
+    <Content Include="Views\Staff\Index.cshtml" />
+    <Content Include="Views\Allocation\Index.cshtml" />
+    <Content Include="Views\TeamRequest\Index.cshtml" />
+    <Content Include="Views\Shared\_CalenderAllocationDay.cshtml" />
+    <Content Include="Views\Shared\_AllocationContainer.cshtml" />
+    <Content Include="Views\Shared\_RequestItem.cshtml" />
+    <Content Include="Views\Team\Index.cshtml" />
+    <Content Include="Views\Shared\_TeamMemberPanel.cshtml" />
+    <Content Include="Views\Dashboard\index.cshtml" />
+    <Content Include="Views\Dashboard\indexManage.cshtml" />
+    <Content Include="Views\Request\Index.cshtml" />
+    <Content Include="Views\Shared\_RequestItemUser.cshtml" />
+    <Content Include="Vids\techBG.webm" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Employee\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -390,6 +605,114 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002011304356_RoundTwoRolesTableReset.resx">
       <DependentUpon>202002011304356_RoundTwoRolesTableReset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021200438_CustomTimeBookModelAddittion.resx">
+      <DependentUpon>202002021200438_CustomTimeBookModelAddittion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021203435_CalendarModelUpdateWithCustomTimeSet.resx">
+      <DependentUpon>202002021203435_CalendarModelUpdateWithCustomTimeSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021314212_CustomTimeForeignKeyRemovedFromCalendar.resx">
+      <DependentUpon>202002021314212_CustomTimeForeignKeyRemovedFromCalendar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021325073_CustomTimeBookChangedToCustomTime.resx">
+      <DependentUpon>202002021325073_CustomTimeBookChangedToCustomTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021327223_BookForeignKeyAddedToCustomTime.resx">
+      <DependentUpon>202002021327223_BookForeignKeyAddedToCustomTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021608231_BookRelationshipAddedToEmployee.resx">
+      <DependentUpon>202002021608231_BookRelationshipAddedToEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021648513_RemovedEmployeeKeyFromBook.resx">
+      <DependentUpon>202002021648513_RemovedEmployeeKeyFromBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021655410_EmployeeBookLinkIdModelCreated.resx">
+      <DependentUpon>202002021655410_EmployeeBookLinkIdModelCreated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021657372_EmployeeBookLinkIdKeyAddedToEmployee.resx">
+      <DependentUpon>202002021657372_EmployeeBookLinkIdKeyAddedToEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021714496_ResetAllRequestedLinkedTables.resx">
+      <DependentUpon>202002021714496_ResetAllRequestedLinkedTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021725417_AddInitialDummyRecord.resx">
+      <DependentUpon>202002021725417_AddInitialDummyRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021742272_AddInitialDummyRecord1.resx">
+      <DependentUpon>202002021742272_AddInitialDummyRecord1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021854383_RemovedDuplicateKeyFromEmployees.resx">
+      <DependentUpon>202002021854383_RemovedDuplicateKeyFromEmployees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021856189_UpdatedKeysInEmployeesBookLink.resx">
+      <DependentUpon>202002021856189_UpdatedKeysInEmployeesBookLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021934162_MinutesAllocatedAddedToBook.resx">
+      <DependentUpon>202002021934162_MinutesAllocatedAddedToBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002231522056_SeedUsers.resx">
+      <DependentUpon>202002231522056_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003081252585_MinutesAddedToUserTable.resx">
+      <DependentUpon>202003081252585_MinutesAddedToUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003170755145_AddProfileImgToTable.resx">
+      <DependentUpon>202003170755145_AddProfileImgToTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007301406004_AddProfilePicToUsers.resx">
+      <DependentUpon>202007301406004_AddProfilePicToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007301446420_AddNameDateToAspRoles.resx">
+      <DependentUpon>202007301446420_AddNameDateToAspRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009121306404_QueueTableAdded.resx">
+      <DependentUpon>202009121306404_QueueTableAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009121309047_QueueTableAddedRD2.resx">
+      <DependentUpon>202009121309047_QueueTableAddedRD2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009261315341_EmployeeLinkTableAdjustedToPointToUsers.resx">
+      <DependentUpon>202009261315341_EmployeeLinkTableAdjustedToPointToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010171237270_ManagerIDAddedToAspUsers.resx">
+      <DependentUpon>202010171237270_ManagerIDAddedToAspUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010171316433_addBookForeignKeyToQueueModel.resx">
+      <DependentUpon>202010171316433_addBookForeignKeyToQueueModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010171318243_removeBookId.resx">
+      <DependentUpon>202010171318243_removeBookId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010171332376_AddDateTimePropertyToBookRecord.resx">
+      <DependentUpon>202010171332376_AddDateTimePropertyToBookRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010181557068_AddBookIDToPendingObj.resx">
+      <DependentUpon>202010181557068_AddBookIDToPendingObj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010241415086_removeForeignKeyFromPendingObj.resx">
+      <DependentUpon>202010241415086_removeForeignKeyFromPendingObj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010241419088_AddPendingForeignKeyTOBookObj.resx">
+      <DependentUpon>202010241419088_AddPendingForeignKeyTOBookObj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010241435301_removePendingKeyFromBook.resx">
+      <DependentUpon>202010241435301_removePendingKeyFromBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010241436544_removeBookKeyToPending.resx">
+      <DependentUpon>202010241436544_removeBookKeyToPending.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011071341194_holUserInfoAddded.resx">
+      <DependentUpon>202011071341194_holUserInfoAddded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011071344086_holUserInfoAdddedMK2.resx">
+      <DependentUpon>202011071344086_holUserInfoAdddedMK2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012281512507_customTimeSetChangedFromDateToString.resx">
+      <DependentUpon>202012281512507_customTimeSetChangedFromDateToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101281439271_AddTeamsTable.resx">
+      <DependentUpon>202101281439271_AddTeamsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

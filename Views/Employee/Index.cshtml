@@ -1,0 +1,44 @@
+﻿@model AnnualLeave.Models.Employee
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Make Employee</h2>
+
+@using (Html.BeginForm("Save", "Employee"))
+{
+    <div class="form-control">
+
+        <div>
+
+            <div>
+                <label>First name</label>
+                @Html.TextBoxFor(e => e.FirstName);
+            </div>
+
+            <div>
+                <label>Last name</label>
+                @Html.TextBoxFor(e => e.LastName);
+            </div>
+
+            <div>
+                <label>Minutes Available</label>
+                @Html.TextBoxFor(e => e.MinutesAvailable);
+            </div>
+
+
+        </div>
+
+        <button type="submit" class="btn">Submit</button>
+
+    </div>
+
+}
+
+<br />
+<br />
+<br />
+
+
+
+

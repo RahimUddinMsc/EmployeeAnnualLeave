@@ -1,0 +1,88 @@
+﻿@model List<AnnualLeave.ViewModel.TeamHandler>
+
+
+
+@{
+    var dte = DateTime.Now;
+    var yr = dte.Year;
+    var month = dte.ToString("MMMM");
+    var dayName = dte.DayOfWeek;
+    var day = dte.Day;
+    var suffix = "";
+
+    if (day == 1 || day == 21 || day == 31)
+    {
+        suffix = "st";
+    }
+    else if (day == 2 || day == 22)
+    {
+        suffix = "nd";
+    }
+    else if (day == 3 || day == 23)
+    {
+        suffix = "rd";
+    }
+    else
+    {
+        suffix = "th";
+    }
+
+    var dayAppend = day + suffix;
+
+}
+
+
+@section CSSAdditions{
+    <link rel="stylesheet" href="~/Content/request.css">
+    <link rel="stylesheet" href="~/Content/Team.css">
+}
+
+@if (!Model.Any())
+{
+    <h2>nufn here</h2>
+}
+
+
+<div class="body-panel-left content-panel-bg">
+
+    <div class="panel-left-container">
+        
+        <div class="title-left-container">
+            <h1>My Team</h1>
+            <h3> @dayName @dayAppend</h3>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<div class="body-panel-right">
+
+    <div class="request-panel-right">
+
+
+
+        @foreach (var user in Model)
+        {
+
+
+            Html.RenderPartial("_TeamMemberPanel", user);
+
+        }
+
+    </div>
+
+</div>
+
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/ajaxModule.js"></script>
+    <script src="~/Scripts/popupModule.js"></script>
+}
+
+

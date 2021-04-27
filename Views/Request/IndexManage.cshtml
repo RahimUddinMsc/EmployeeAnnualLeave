@@ -1,0 +1,129 @@
+﻿@model AnnualLeave.Dtos.RequestDto
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var dte = DateTime.Now;
+    var yr = dte.Year;
+    var month = dte.ToString("MMMM");
+    var dayName = dte.DayOfWeek;
+    var day = dte.Day;
+    var suffix = "";    
+
+    if (day == 1 || day == 21 || day == 31)
+    {
+        suffix = "st";
+    }
+    else if (day == 2 || day == 22)
+    {
+        suffix = "nd";
+    }
+    else if (day == 3 || day == 23)
+    {
+        suffix = "rd";
+    }
+    else
+    {
+        suffix = "th";
+    }
+
+    var dayAppend = day + suffix;
+}
+
+@section CSSAdditions{
+
+    <link rel="stylesheet" href="~/Content/request.css">    
+}
+
+
+<div class="body-panel-left content-panel-bg">
+
+    <div class="panel-left-container">
+
+        <div class="title-left-container">
+            <h2>Recent Actions</h2>
+            <h3>@dayName @dayAppend</h3>
+        </div>
+        
+
+        <hr />
+
+        <div class="request-stats-block">
+
+            <div class="request-stat-info">
+                <span class="request-stat-title">Approved</span>
+                <span>@Model.Approved</span>                
+            </div>
+
+            <div class="request-stat-info">
+                <span class="request-stat-title">Declined</span>
+                <span>@Model.Declined</span>                 
+            </div>
+
+            <div class="request-stat-info">
+                <span class="request-stat-title">Pending</span>
+                <span>@Model.Pending</span>                 
+            </div>
+
+        </div>        
+
+    </div>
+
+</div>
+
+<div class="body-panel-right">
+
+    <div class="request-panel-right">
+
+        @if (!Model.StaffRequests.Any())
+        {
+            <div class="no-request-panel content-panel-bg">
+                <i class="fa fa-archive" aria-hidden="true"></i>
+                <h2>No Requests</h2>
+            </div>            
+        }
+        else
+        {
+            foreach (var user in Model.UserList)
+            {
+
+                <div class="request-panel-parent content-panel-bg">
+                    <h2 class="request-name-title">@user.Name</h2>
+
+                    @foreach (var req in Model.StaffRequests)
+                    {
+
+                        if (req.UserID == user.UserID)
+                        {
+                            Html.RenderPartial("_RequestItem", req);
+                        }
+
+                    }
+
+                </div>
+
+            }
+        }
+
+
+
+
+    </div>
+
+</div>
+
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/ajaxModule.js"></script>
+    <script src="~/Scripts/popupModule.js"></script>
+    <script src="~/Scripts/RequestsManage.js"></script>
+
+}
+
+
+
+
+

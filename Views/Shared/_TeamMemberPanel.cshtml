@@ -1,0 +1,68 @@
+﻿@model AnnualLeave.ViewModel.TeamHandler
+
+@{
+    var onHolClass = "noHol";
+
+    if (Model.OnHoliday)
+    {
+        onHolClass = "onHol";
+    }
+
+    var hrConvertAval = Math.Round((Model.MinutesAvailable / 60) * 100) / 100;
+
+}
+
+<div class="team-member-panel content-panel-bg">
+
+    <div class="team-profile-img">
+        <div class="@onHolClass member-img-bg" style="background-image: linear-gradient(rgba(0,130,170,0),rgba(0,130,170,.4)), url(@Model.profileImg)">
+        </div>
+
+        <div class="team-hol-info">
+            <span>@hrConvertAval hr</span>
+        </div>
+
+    </div>
+
+    <div class="member-info-panel">
+        <div class="member-panel-heading">
+            <span>@Model.Name</span>
+            <hr />
+        </div>
+
+        <div class="member-hol-panel">
+
+            @if (Model.UserHolidayInfo.Count == 0)
+            {
+                <h4>No upcoming holiday</h4>
+            }
+            else
+            {
+                foreach (var hol in Model.UserHolidayInfo)
+                {
+                    <div class="member-hol-block">
+                        <span class="member-hol-date">@hol.Date</span>
+
+                        @if (hol.CustomTime)
+                        {
+                            <span class="member-hol-time">@hol.StartTime-@hol.EndTime</span>
+                        }
+                        else
+                        {
+                            <span class="member-hol-time">Full Day</span>
+                        }
+                    </div>
+                }
+            }
+
+        </div>
+       
+    </div>
+
+</div>
+
+
+
+
+
+

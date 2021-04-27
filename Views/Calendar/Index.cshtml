@@ -1,0 +1,124 @@
+﻿@model AnnualLeave.ViewModel.EmployeeCalendarData
+
+
+@{
+    ViewBag.Title = "Calendar";
+    var dte = DateTime.Now;
+    var yr = dte.Year;
+    var month = dte.ToString("MMMM");
+    var dayName = dte.DayOfWeek;
+    var day = dte.Day;
+    var suffix = "";    
+
+    if (day == 1 || day == 21 || day == 31)
+    {
+        suffix = "st";
+    }
+    else if (day == 2 || day == 22)
+    {
+        suffix = "nd";
+    }
+    else if (day == 3 || day == 23)
+    {
+        suffix = "rd";
+    }
+    else
+    {
+        suffix = "th";
+    }
+
+    var dayAppend = day + suffix;
+
+}
+
+@section CSSAdditions{
+    <link rel="stylesheet" href="~/Content/calendar.css">
+}
+
+
+<div class="body-panel-left content-panel-bg">
+
+    <div class="panel-left-container ">
+
+        <div class="title-left-container">
+            <h1 class="cal-dte-heading">@dayName @dayAppend</h1>
+            <h3 class="inline-dte-month cur-date-block">
+                <span class="curr-month-date">@month</span>
+                <span class="curr-year-date">@yr</span>
+            </h3>
+            <span class="dte-select-span">
+                <span class="prev-month-btn btn-month-change"> prev </span>
+                <span class="next-month-btn btn-month-change"> next </span>
+                @*<span class="cur-date-block"></span>*@
+            </span>
+
+        </div>
+
+
+        @*<div class="date-heading-block">
+                <div class="prev-month-btn btn-month-change"> &lt; </div>
+                <div class="cur-date-block">
+                    <span class="curr-month-date"> Month - </span>
+                    <span class="curr-month-divider"> - </span>
+                    <span class="curr-year-date"> Year </span>
+                </div>
+                <div class="next-month-btn btn-month-change"> &gt; </div>
+            </div>*@
+
+
+    <div class="hol-allocation-block">
+
+
+        <div class="inner-alloaction-block">
+            <div>
+                <span class="inner-alloction-value" id="hol-available-val">100</span> <span>hr</span>
+            </div>
+            <div class="inner-alloaction-heading">
+                Available 
+            </div>
+        </div>
+
+
+        <div class="inner-alloaction-block">
+            <div class="inner-alloaction-value">
+                <span class="inner-alloction-value" id="hol-used-val">100</span> <span>hr</span>
+            </div>
+            <div class="inner-alloaction-heading">
+                Used
+            </div>
+        </div>
+        
+        <div id="bookConfirm">
+            <span>Book</span>
+        </div>
+
+    </div>
+
+
+    </div>
+</div>
+
+<div class="body-panel-right" oncontextmenu="return false;">
+
+    <div class="panel-right-container" >
+        <div class="cal-container-headings">
+            <div class="cal-header content-panel-bg">Mon</div>
+            <div class="cal-header content-panel-bg">Tue</div>
+            <div class="cal-header content-panel-bg">Wed</div>
+            <div class="cal-header content-panel-bg">Thur</div>
+            <div class="cal-header content-panel-bg">Fri</div>
+            <div class="cal-header content-panel-bg">Sat</div>
+            <div class="cal-header content-panel-bg">Sun</div>
+        </div>
+        <div class="calendar-container" oncontextmenu="return false;">
+
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+    <script src="~/Scripts/ajaxModule.js"></script>
+    <script src="~/Scripts/popupModule.js"></script>
+    <script src="~/Scripts/calendarScript.js"></script>
+}

@@ -1,0 +1,36 @@
+﻿@model AnnualLeave.Models.Calendar
+
+
+@{ 
+    var activeClass = "cal-date-block";
+    var dteDay = DateTime.Now;
+
+
+    if(Model.Month < dteDay.Month)
+    {
+        activeClass = "cal-block-disabled";
+    }
+    else if (Model.Month > dteDay.Month)
+    {
+        activeClass = "cal-date-block";
+    }
+    else if(dteDay.Day > Model.Day && Model.Month >= dteDay.Month )
+    {
+        activeClass = "cal-block-disabled";
+    }
+
+    var hours = Math.Floor(Model.AvailableMinutes / 60);
+    var mins = Model.AvailableMinutes % 60;
+    var timeRem = hours + "h " + mins + "m";
+
+}
+
+<div class="@activeClass content-panel-bg" data-cal-id="@Model.CalendarId" data-day="@Model.Day" data-month="@Model.Month" data-year="@Model.Year">
+    <div class="cal-date-header ">
+        <span>@Model.Day</span>
+
+    </div>
+    <div class="cal-min-header">
+        <span class="allocation-min-value" data-allocated-mins="@Model.AvailableMinutes">@timeRem</span>
+    </div>
+</div>

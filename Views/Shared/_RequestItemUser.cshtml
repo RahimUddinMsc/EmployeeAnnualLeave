@@ -1,0 +1,51 @@
+﻿@model AnnualLeave.ViewModel.UserRequestInfo
+
+<div class="request-item-parent" data-book-id="@Model.BookID" data-emp-id="@Model.EmpLinkId" data-cal-id="@Model.CalendarId">
+
+
+    <div class="req-cal-block">
+        <div class="req-cal-date">
+            <span>@Model.Date</span>
+        </div>
+
+        <div class="req-cal-time">
+            <span>
+                @if (Model.CustomTime == true)
+                {
+                    @(Model.StartTime + " - " + Model.EndTime)
+                }
+                else
+                {
+                    @("Full Day")
+                }
+            </span>
+        </div>
+
+        <div class="req-options">
+     
+            <div class="req-cal-cancel rec-action-btn">
+                <span>Cancel</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="req-content">
+
+        <div class="req-content-reason-user">
+            @Model.Reason
+
+        </div>
+
+        <div class="req-content-response-user">
+            @Model.Response
+        </div>
+
+
+    </div>
+
+
+
+
+</div>

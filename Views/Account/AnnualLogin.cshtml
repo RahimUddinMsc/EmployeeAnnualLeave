@@ -1,0 +1,58 @@
+﻿@using AnnualLeave.Models
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+@section CSSAdditions {
+    @Styles.Render("~/Content/Login.css")
+}
+
+<script>
+    document.querySelector('.nav-bar-pos').style.display = "none"
+</script>
+
+    <div class="login-ct">
+
+        @*<div class="login-header-block">
+
+            <div class="login-header-title">
+                <b>Login</b>
+                <hr class="login-header-underline" />
+            </div>            
+
+        </div>*@
+
+        <div class="login-entry-block content-panel-bg">
+
+            <div class="login-entry-ct">
+
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="login-field-ct">
+                        <h4><b>Username</b></h4>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "text-entry-field" })
+                    </div>
+
+                    <div class="login-field-ct">
+                        <h4><b>Password</b></h4>
+                        @Html.PasswordFor(m => m.Password, new { @class = "text-entry-field" })
+                    </div>
+
+                    <div class="login-field-ct">
+                        <div class="login-btn-ct">
+                            <input type="submit" value="Log in" class="login-btn" />
+                        </div>
+                    </div>
+                }
+                
+            </div>
+
+        </div>
+
+
+
+    </div>

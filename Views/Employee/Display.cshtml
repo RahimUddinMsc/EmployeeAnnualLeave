@@ -1,0 +1,14 @@
+﻿@model IEnumerable<AnnualLeave.Models.EmployeeBookLink>
+@{
+    ViewBag.Title = "Display";
+}
+
+<h2>All Employees</h2>
+
+@foreach (var data in Model)
+{
+
+    <h2>@data.Employee.FirstName  -  @data.Employee.LastName </h2>
+
+
+}

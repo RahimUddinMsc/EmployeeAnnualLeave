@@ -1,0 +1,103 @@
+﻿@model AnnualLeave.ViewModel.CalendarAllocation
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Calendar";
+    var dte = DateTime.Now;
+    var yr = dte.Year;
+    var month = dte.ToString("MMMM");
+    var dayName = dte.DayOfWeek;
+    var day = dte.Day;
+    var suffix = "";
+
+    if (day == 1 || day == 21 || day == 31)
+    {
+        suffix = "st";
+    }
+    else if (day == 2 || day == 22)
+    {
+        suffix = "nd";
+    }
+    else if (day == 3 || day == 23)
+    {
+        suffix = "rd";
+    }
+    else
+    {
+        suffix = "th";
+    }
+
+    var dayAppend = day + suffix;
+
+}
+
+@section CSSAdditions{
+
+    <link rel="stylesheet" href="~/Content/allocation.css">
+}
+
+
+<div class="body-panel-left content-panel-bg">
+
+    <div class="panel-left-container">
+
+        <div class="title-left-container">
+            <h1 class="cal-dte-heading">Allocation</h1>
+            <h3 class="inline-dte-month cur-date-block">
+                <span class="curr-month-date">@month</span>
+                <span class="curr-year-date">@yr</span>
+            </h3>
+            <span class="dte-select-span">
+                <span class="prev-month-btn btn-month-change"> prev </span>
+                <span class="next-month-btn btn-month-change"> next </span>
+                @*<span class="cur-date-block"></span>*@
+            </span>
+
+        </div>
+
+
+        <div class="allocation-input-block">
+            <div class="allocation-input-entry">
+                <input id="time-allocation-input" type="text" />
+            </div>
+            <div class="allocation-input-btns">
+                <div class="allocation-btn-block">
+                    <div><i class="fa fa-sliders allocation-btn-set" aria-hidden="true"></i></div>
+                    <div class="allocation-btn-text">Set Time</div>
+                </div>
+                <div class="allocation-btn-block">
+                    <div><i class="fa fa-calendar-plus-o allocation-btn-increase" aria-hidden="true"></i></div>
+                    <div class="allocation-btn-text">Increase</div>
+                </div>
+                <div class="allocation-btn-block">
+                    <div><i class="fa fa-calendar-minus-o allocation-btn-decrease" aria-hidden="true"></i></div>
+                    <div class="allocation-btn-text">Decrease</div>
+                </div>
+            </div>
+            <div id="submit-allocation">Submit</div>
+        </div>
+
+
+    </div>
+
+</div>
+
+<div class="body-panel-right">
+
+    <div class="panel-right-container">
+        @{
+            Html.RenderPartial("_AllocationContainer", Model);
+        }
+    </div>
+
+</div>
+
+@section scripts{
+
+    <script src="~/Scripts/ajaxModule.js"></script>
+    <script src="~/Scripts/popupModule.js"></script>
+    <script src="~/Scripts/allocation.js"></script>
+
+}
+

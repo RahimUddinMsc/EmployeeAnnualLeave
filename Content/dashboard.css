@@ -1,0 +1,172 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.body-container {
+    height: 100%;
+}
+
+
+.body-main-panel {
+    background: #12647fc7;
+}
+
+
+.body-panel-left {
+    opacity:0;
+    transform: translateX(-100%);
+    animation: left-panel-slide 1.5s forwards ease-in-out 2.5s;
+}
+
+@keyframes left-panel-slide{
+    0% {
+        transform: translateX(-100%)
+    }
+    100% {
+        transform: translateX(0px);
+        opacity:1
+    }
+}
+
+
+.panel-left-container{
+}
+
+.dashboard-panel-right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+
+.user-greeting-ct {
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    animation: greeting-ct-move 1s forwards ease-in 2s;
+}
+
+@keyframes greeting-ct-move{
+    0%{
+        height:100%;
+        width:100%;
+    }
+    100%{
+        top:5%;
+        left:32%;
+        height:62%;
+        width:66%;            
+    }
+}
+
+.greeting-ct-static {
+    position: static;
+    height: 70% !important;
+    width: 100% !important;
+}
+/*.user-greeting-ct{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:70%;
+    width:100%;
+}
+*/
+.user-greeting-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 23%;
+    /* border: 1px solid white; */
+    border-radius: 50%;
+    /*background-image: linear-gradient(rgba(0,130,170,.3),rgba(0,130,170,.3)), url(https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png);*/
+    background-size: cover;
+    background-origin: border-box;
+    background-clip: border-box;
+    margin-top: 5%;
+    box-shadow: 3px 3px 8px;
+}
+
+.user-greeting-name {
+    height: 20%;
+    width: 100%;
+    text-align: center;
+    color: #eee8a9;
+}
+
+.user-info-ct{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 27%;
+    width:100%;    
+}
+
+.user-greeting-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 32%;
+    opacity: 0;
+    transform: translateY(50%);
+}
+
+
+.user-greeting-info:nth-child(1) {
+    animation: greeting-info-slide .5s forwards ease-in-out 3.5s;
+}
+
+.user-greeting-info:nth-child(2) {
+    animation: greeting-info-slide .5s forwards ease-in-out 4s;
+}
+
+.user-greeting-info:nth-child(3) {
+    animation: greeting-info-slide .5s forwards ease-in-out 4.5s;
+}
+
+@keyframes greeting-info-slide{
+    0%{
+        opacity:0;
+        transform: translateY(50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+
+.user-greeting-info h2 {
+    color: white
+}
+
+.user-greeting-info h3 {
+    color: #eee8a9
+}
+
+.leave-ul-list{
+    padding-left:20px;
+}

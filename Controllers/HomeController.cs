@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Data.Entity;
+using AnnualLeave.ViewModel;
 
 namespace AnnualLeave.Controllers
 {
@@ -21,12 +22,27 @@ namespace AnnualLeave.Controllers
         }
 
         public ActionResult Index()
+                
         {
+            //if (User.IsInRole(RoleName.CanManageStaff))                
+            //{
+            //    //return View("AdminIndex",obj);
+            //    return RedirectToAction("Index", "Staff");
+            //}
+            //else
+            //{
 
-            var test = _context.Employees.Include(e => e.Role).ToList();
-            return View(test);
+            //    //return View(obj);
+            //    return View();
+            //    //return Content("test");
+            //}
+
+            return RedirectToAction("Index", "Dashboard");
+
+
         }
-
+        
+        [Route("about")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -41,6 +57,7 @@ namespace AnnualLeave.Controllers
             return View();
         }
 
+        [Authorize(Roles = RoleName.CanManageStaff)]
         public ActionResult Details(int id)
         {
             var test = _context.Employees.SingleOrDefault(c => c.EmployeeId == id);

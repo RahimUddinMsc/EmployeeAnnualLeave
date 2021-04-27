@@ -1,0 +1,118 @@
+﻿@model AnnualLeave.ViewModel.DashboardInfo
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var dte = DateTime.Now;
+    var yr = dte.Year;
+    var month = dte.ToString("MMMM");
+    var dayName = dte.DayOfWeek;
+    var day = dte.Day;
+    var suffix = "";
+    var hrConvertAval = Math.Round((Model.MinutesAvailable / 60) * 100) / 100;
+    var hrConvertUsed = Math.Round((Model.MinutesUsed / 60) * 100) / 100;
+
+
+    if (day == 1 || day == 21 || day == 31)
+    {
+        suffix = "st";
+    }
+    else if (day == 2 || day == 22)
+    {
+        suffix = "nd";
+    }
+    else if (day == 3 || day == 23)
+    {
+        suffix = "rd";
+    }
+    else
+    {
+        suffix = "th";
+    }
+
+    var dayAppend = day + suffix;
+
+}
+
+
+@section CSSAdditions{
+
+    <link rel="stylesheet" href="~/Content/dashboardV2.css">
+}
+<div class="body-panel-left content-panel-bg">
+
+    <div class="panel-left-container">
+
+        <div class="title-left-container">
+            <h1>@dayName @dayAppend</h1>
+            <h3> @month @yr</h3>
+
+        </div>
+
+        @if (!Model.upcomingLeave.Any())
+        {
+            <div class="left-panel-content">
+                <h4>No upcoming leave</h4>
+            </div>
+        }
+        else
+        {
+            <div class="left-panel-content">
+                <h4>Upcoming leave</h4>
+
+                <ul class="leave-ul-list">
+                    @foreach (var str in Model.upcomingLeave)
+                    {
+                        <li>@str</li>
+                    }
+                </ul>
+            </div>
+        }
+
+    </div>
+
+</div>
+
+<div class="body-panel-right">
+
+    <div class="dashboard-panel-right">
+
+        <div class="user-greeting-ct">
+
+            <div class="user-greeting-img" style="background-image: linear-gradient(rgba(0,130,170,0),rgba(0,130,170,.3)), url(@Model.profileImg);">
+            </div>
+
+            <div class="user-greeting-name ">
+                <h2>Welcome @Model.Name</h2>
+            </div>
+
+        </div>
+
+
+        <div class="user-info-ct">
+
+            <div class="user-greeting-info content-panel-bg">
+                <h2>@hrConvertUsed</h2>
+                <h3>Hours used</h3>
+            </div>
+
+            <div class="user-greeting-info content-panel-bg">
+                <h2>@hrConvertAval</h2>
+                <h3>Hours available</h3>
+            </div>
+
+            <div class="user-greeting-info content-panel-bg">
+                <h2>@Model.NumRequest</h2>
+                <h3>Requests</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+@section scripts{
+    <script src="~/Scripts/dashboard.js"></script>
+}
