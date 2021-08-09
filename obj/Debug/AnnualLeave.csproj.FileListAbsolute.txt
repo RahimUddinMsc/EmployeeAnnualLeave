@@ -586,7 +586,6 @@ C:\Repos\EmployeeAnnualLeave\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Repos\EmployeeAnnualLeave\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Repos\EmployeeAnnualLeave\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Repos\EmployeeAnnualLeave\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Repos\EmployeeAnnualLeave\obj\Debug\AnnualLeave.csprojAssemblyReference.cache
 C:\Repos\EmployeeAnnualLeave\obj\Debug\AnnualLeave.Migrations.InitialModel.resources
 C:\Repos\EmployeeAnnualLeave\obj\Debug\AnnualLeave.Migrations.AddBookType.resources
 C:\Repos\EmployeeAnnualLeave\obj\Debug\AnnualLeave.Migrations.RemoveEmployeeIdFromBook.resources
@@ -644,3 +643,4 @@ C:\Repos\EmployeeAnnualLeave\obj\Debug\AnnualLeave.csproj.CoreCompileInputs.cach
 C:\Repos\EmployeeAnnualLeave\obj\Debug\AnnualLeave.csproj.CopyComplete
 C:\Repos\EmployeeAnnualLeave\obj\Debug\AnnualLeave.dll
 C:\Repos\EmployeeAnnualLeave\obj\Debug\AnnualLeave.pdb
+C:\Repos\EmployeeAnnualLeave\obj\Debug\AnnualLeave.csprojAssemblyReference.cache
